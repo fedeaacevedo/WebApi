@@ -1,12 +1,20 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Api.Services;
+using Data.Entities;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers
 {
+    [ApiController]
+    [Route("api/[controller]")]
     public class ProductosController : Controller
     {
-        public IActionResult Index()
+        
+        [HttpGet]
+        [Route("BuscarProductos")]
+        public async Task<List<Productos>> BuscarProductos()
         {
-            return View();
+            var buscarProductos = new ProductosServices();
+            return await buscarProductos.BuscarLista();
         }
     }
 }
